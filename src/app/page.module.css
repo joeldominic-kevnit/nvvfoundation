@@ -1,0 +1,629 @@
+/* Curtain wrap — content lifts away to reveal the fixed footer underneath.
+   Footer-height is published as --footer-height by the Footer component when
+   it's in curtain mode; falls back to a sensible default if not. */
+.curtainWrap {
+  position: relative;
+  z-index: 1;
+  background-color: var(--paper);
+  border-radius: 0 0 24px 24px;
+  margin-bottom: var(--footer-height, 420px);
+
+  /* Layered drop shadow so the curtain reads as a real lifted card sitting
+     above the dark footer — close ambient + tight contact + deep cast. */
+  box-shadow:
+    0 2px 0 rgba(91, 192, 193, 0.18),         /* hairline highlight on the edge */
+    0 24px 40px -8px rgba(9, 24, 50, 0.55),    /* tight contact shadow */
+    0 60px 120px -20px rgba(9, 24, 50, 0.65),  /* deep cast */
+    0 120px 200px -40px rgba(0, 0, 0, 0.5);    /* far falloff */
+}
+
+/* A soft underbelly glow sitting just below the curtain's bottom edge.
+   Helps the eye read the bottom edge as a real lit edge instead of a hard cut. */
+.curtainWrap::after {
+  content: "";
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: -30px;
+  height: 60px;
+  background: radial-gradient(ellipse at center top, rgba(91, 192, 193, 0.22), transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.destinations {
+  background-color: var(--paper);
+  border-bottom: 1px solid rgba(16, 42, 76, 0.1);
+}
+
+.destGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(16, 42, 76, 0.12);
+  border: 1px solid rgba(16, 42, 76, 0.12);
+}
+
+.destGrid > * {
+  border: 0 !important;
+}
+
+/* ══════ Services / How We Work — Dark Timeline ══════ */
+.services {
+  background-color: var(--ink);
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Section header */
+.servicesHead {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.servicesEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--teal-soft);
+}
+
+.servicesEyebrow::before,
+.servicesEyebrow::after {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--teal-soft);
+  opacity: 0.5;
+}
+
+.servicesTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  margin-top: 1rem;
+  font-variation-settings: "opsz" 72, "SOFT" 50;
+}
+
+.servicesTitle em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--teal-soft);
+}
+
+.servicesLede {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(246, 241, 231, 0.6);
+  max-width: 48ch;
+  margin: 1rem auto 0;
+}
+
+/* Timeline layout */
+.servicesTimeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 900px;
+  margin: 0 auto;
+  /* progress value (0 → 1) driven by TimelineProgress client component */
+  --timeline-progress: 0;
+}
+
+/* Static dim rail */
+.servicesTimeline::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(91, 192, 193, 0.15);
+  transform: translateX(-50%);
+}
+
+/* Glowing trace that fills from top as the user scrolls into the section */
+.servicesTimeline::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: calc(var(--timeline-progress, 0) * 100%);
+  transform: translateX(-50%);
+  background: linear-gradient(
+    180deg,
+    rgba(91, 192, 193, 0) 0%,
+    var(--teal-soft) 12%,
+    var(--teal) 50%,
+    var(--teal-soft) 88%,
+    rgba(91, 192, 193, 0) 100%
+  );
+  box-shadow:
+    0 0 6px rgba(91, 192, 193, 0.65),
+    0 0 18px rgba(91, 192, 193, 0.5),
+    0 0 36px rgba(44, 164, 165, 0.35);
+  /* Smooth out the height update so rAF jitter doesn't show */
+  transition: height 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  filter: saturate(1.1);
+  z-index: 1;
+}
+
+
+/* Each step */
+.timelineStep {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  align-items: start;
+  position: relative;
+}
+
+/* Connector column (dot + line) */
+.timelineConnector {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.timelineDot {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 2px solid var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 0 0 rgba(91, 192, 193, 0);
+}
+
+.timelineStep:hover .timelineDot {
+  background: var(--teal);
+  box-shadow: 0 0 30px rgba(91, 192, 193, 0.35);
+  transform: scale(1.1);
+}
+
+.timelineDot span {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--teal-soft);
+  transition: color 300ms ease;
+}
+
+.timelineStep:hover .timelineDot span {
+  color: var(--ink);
+}
+
+.timelineLine {
+  width: 1px;
+  height: 80px;
+  background: transparent;
+}
+
+/* Card placement — alternating left/right */
+.timelineLeft .timelineCard {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.timelineRight .timelineCard {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+/* The card itself */
+.timelineCard {
+  position: relative;
+  padding: 2.25rem;
+  border-radius: 8px;
+  background: rgba(246, 241, 231, 0.04);
+  border: 1px solid rgba(246, 241, 231, 0.08);
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  transition: border-color 400ms ease, background 400ms ease, transform 300ms ease;
+  overflow: hidden;
+}
+
+.timelineCard:hover {
+  border-color: rgba(91, 192, 193, 0.25);
+  background: rgba(246, 241, 231, 0.07);
+  transform: translateY(-3px);
+}
+
+/* Glow effect on hover */
+.timelineCardGlow {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(91, 192, 193, 0.12) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 500ms ease;
+  pointer-events: none;
+}
+
+.timelineCard:hover .timelineCardGlow {
+  opacity: 1;
+}
+
+/* Icon circle */
+.timelineCardIcon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(91, 192, 193, 0.1);
+  border: 1px solid rgba(91, 192, 193, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--teal-soft);
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1), background 300ms ease;
+}
+
+.timelineCard:hover .timelineCardIcon {
+  transform: rotate(-8deg) scale(1.08);
+  background: rgba(91, 192, 193, 0.18);
+}
+
+/* Card text */
+.timelineCardContent h3 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--paper);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.timelineCardContent p {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: rgba(246, 241, 231, 0.6);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .servicesTimeline::before,
+  .servicesTimeline::after {
+    left: 28px;
+  }
+
+  .timelineStep {
+    grid-template-columns: 48px 1fr;
+  }
+
+  .timelineConnector {
+    grid-column: 1;
+  }
+
+  .timelineLeft .timelineCard,
+  .timelineRight .timelineCard {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .timelineDot {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ══════ Contact / Consult — Light, Distinct ══════ */
+.contact {
+  background-color: var(--paper-warm);
+  padding: 8rem 0;
+  position: relative;
+  overflow: hidden;
+  color: var(--ink);
+  border-top: 1px solid rgba(16, 42, 76, 0.08);
+}
+
+/* Ambient background */
+.contactBg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(44, 164, 165, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 0% 100%, rgba(44, 164, 165, 0.04) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+/* Floating orbs — subtle on light bg */
+.contactOrb1 {
+  position: absolute;
+  top: 10%;
+  right: -60px;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(44, 164, 165, 0.07) 0%, transparent 60%);
+  filter: blur(80px);
+  animation: contactFloat 12s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.contactOrb2 {
+  position: absolute;
+  bottom: 5%;
+  left: -40px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(29, 61, 114, 0.05) 0%, transparent 60%);
+  filter: blur(70px);
+  animation: contactFloat 15s ease-in-out 2s infinite alternate-reverse;
+  pointer-events: none;
+}
+
+@keyframes contactFloat {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, -20px) scale(1.15); }
+}
+
+/* ──── Grid ──── */
+.contactGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 6rem;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+
+.contactInfo {
+  position: sticky;
+  top: 8rem;
+}
+
+.contactEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal-deep);
+  margin-bottom: 1.5rem;
+}
+
+.contactEyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--teal-deep);
+}
+
+.contactTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 4.5vw, 3.8rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 2rem;
+  font-variation-settings: "opsz" 144, "SOFT" 60;
+}
+
+.contactTitle em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--teal-deep);
+}
+
+.contactDesc {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 44ch;
+  margin-bottom: 2rem;
+}
+
+/* Response badge */
+.responseBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1.25rem;
+  background: rgba(44, 164, 165, 0.08);
+  border: 1px solid rgba(44, 164, 165, 0.18);
+  border-radius: 40px;
+  margin-bottom: 3rem;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.responseBadge strong {
+  color: var(--teal-deep);
+  font-weight: 600;
+}
+
+.responseDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(0.85); }
+}
+
+/* Trust markers */
+.trustMarkers {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.marker {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: all 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.marker:hover {
+  background: rgba(44, 164, 165, 0.04);
+  border-color: rgba(44, 164, 165, 0.12);
+}
+
+.markerIcon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(44, 164, 165, 0.1);
+  border: 1px solid rgba(44, 164, 165, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--teal-deep);
+  transition: all 400ms ease;
+}
+
+.marker:hover .markerIcon {
+  background: rgba(44, 164, 165, 0.18);
+  box-shadow: 0 0 20px rgba(44, 164, 165, 0.12);
+}
+
+.marker h4 {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+
+.marker p {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--ink-muted);
+  max-width: 34ch;
+}
+
+/* Form container — dark card on light bg for contrast */
+.formContainer {
+  background:
+    radial-gradient(ellipse 80% 60% at 0% 0%, rgba(91, 192, 193, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%, rgba(29, 61, 114, 0.35) 0%, transparent 65%),
+    var(--ink);
+  color: var(--paper);
+  padding: 3rem;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow:
+    0 24px 80px rgba(16, 42, 76, 0.22),
+    0 4px 20px rgba(16, 42, 76, 0.12),
+    inset 0 1px 0 rgba(91, 192, 193, 0.08);
+}
+
+/* Faint architectural grid on the right side of the card */
+.formContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(91, 192, 193, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 192, 193, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse at bottom right, #000 0%, transparent 65%);
+  -webkit-mask-image: radial-gradient(ellipse at bottom right, #000 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.formContainer > * {
+  position: relative;
+  z-index: 1;
+}
+
+.formContainer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal-deep), var(--teal), var(--teal-soft));
+}
+
+/* ──── Responsive ──── */
+@media (max-width: 1024px) {
+  .destGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .contactGrid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+  .contactInfo {
+    position: static;
+  }
+  .formContainer {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .destGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .services {
+    padding: 4rem 0;
+  }
+  .servicesHead {
+    margin-bottom: 3rem;
+  }
+  .contact {
+    padding: 5rem 0;
+  }
+  .contactTitle {
+    margin-bottom: 1.5rem;
+  }
+  .responseBadge {
+    margin-bottom: 2rem;
+  }
+}
+

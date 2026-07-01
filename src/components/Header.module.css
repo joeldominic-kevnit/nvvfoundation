@@ -1,0 +1,334 @@
+/* ═══════════════════════════════════════════════
+   Header — Scroll-aware + animated mobile menu
+   ═══════════════════════════════════════════════ */
+
+/* ──── Base header ──── */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 78px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 500ms ease,
+    border-color 500ms ease,
+    box-shadow 500ms ease,
+    backdrop-filter 500ms ease;
+}
+
+/* Scrolled state */
+.scrolled {
+  background-color: rgba(16, 42, 76, 0.88);
+  backdrop-filter: saturate(160%) blur(16px);
+  -webkit-backdrop-filter: saturate(160%) blur(16px);
+  border-bottom-color: rgba(91, 192, 193, 0.12);
+  box-shadow: 0 2px 24px rgba(9, 24, 50, 0.25);
+}
+
+/* ──── Container ──── */
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* ──── Logo ──── */
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  position: relative;
+  z-index: 2;
+}
+
+.logo {
+  object-fit: contain;
+  transition: transform 300ms ease;
+}
+
+.logoContainer:hover .logo {
+  transform: rotate(-6deg) scale(1.05);
+}
+
+.brand {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+  line-height: 1.15;
+  white-space: nowrap;
+  transition: color 400ms ease;
+}
+
+/* When not scrolled and over the hero, text is white.
+   When scrolled, stays white on dark bg anyway. */
+
+/* ──── Desktop nav ──── */
+.nav {
+  display: flex;
+  gap: 0.25rem;
+  background: rgba(246, 241, 231, 0.06);
+  border: 1px solid rgba(246, 241, 231, 0.1);
+  border-radius: 40px;
+  padding: 0.35rem;
+}
+
+.navLink {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: rgba(246, 241, 231, 0.7);
+  padding: 0.55rem 1.15rem;
+  border-radius: 30px;
+  transition: color 200ms ease, background-color 250ms ease;
+  position: relative;
+}
+
+.navText {
+  position: relative;
+  z-index: 1;
+}
+
+.navLink:hover {
+  color: var(--paper);
+  background-color: rgba(91, 192, 193, 0.15);
+}
+
+.navLink:active {
+  background-color: rgba(91, 192, 193, 0.25);
+}
+
+/* ──── Actions ──── */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.applyBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.25rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--paper);
+  border-radius: 30px;
+  border: 1px solid transparent;
+  transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.applyBtn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 30px;
+  background: linear-gradient(135deg, var(--teal-soft), var(--teal));
+  transform: translateY(105%);
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+.applyBtn:hover::before {
+  transform: translateY(0);
+}
+
+.applyBtn:hover {
+  color: var(--paper);
+  border-color: transparent;
+  box-shadow: 0 4px 20px rgba(91, 192, 193, 0.3);
+}
+
+.applyBtn > * {
+  position: relative;
+  z-index: 1;
+}
+
+.applyBtn svg {
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.applyBtn:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* ──── Hamburger ──── */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid rgba(246, 241, 231, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 0;
+  gap: 5px;
+  transition: border-color 200ms ease;
+  position: relative;
+  z-index: 2;
+}
+
+.burger:hover {
+  border-color: rgba(246, 241, 231, 0.5);
+}
+
+.burgerLine {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: var(--paper);
+  border-radius: 1px;
+  transition: all 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center;
+}
+
+/* Animated X state */
+.burgerOpen .burgerLine:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.burgerOpen .burgerLine:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.burgerOpen .burgerLine:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ──── Mobile overlay ──── */
+.mobileOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: var(--ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 400ms ease, visibility 400ms ease;
+}
+
+.mobileOpen {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mobileLink {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 300;
+  color: var(--paper);
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: color 200ms ease;
+  font-variation-settings: "opsz" 72, "SOFT" 50;
+}
+
+.mobileOpen .mobileLink {
+  animation: mobileSlideIn 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.mobileLink:hover {
+  color: var(--teal-soft);
+}
+
+.mobileLinkNum {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--teal-soft);
+  opacity: 0.6;
+}
+
+.mobileCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2.5rem;
+  padding: 1rem 2rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--paper);
+  border-radius: 2px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.mobileCta > * {
+  position: relative;
+  z-index: 1;
+}
+
+.mobileOpen .mobileCta {
+  animation: mobileSlideIn 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes mobileSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ──── Responsive ──── */
+@media (max-width: 900px) {
+  .nav {
+    display: none;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  .applyBtn {
+    display: none;
+  }
+}
+
+@media (max-width: 540px) {
+  .brand {
+    display: none;
+  }
+}

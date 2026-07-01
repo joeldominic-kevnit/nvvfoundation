@@ -1,0 +1,485 @@
+/* ═══════════════════════════════════════════════
+   Footer — normal-flow, editorial dark
+   ═══════════════════════════════════════════════ */
+
+.footer {
+  position: relative;
+  background-color: var(--ink);
+  color: var(--paper);
+  padding: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Curtain mode — opt-in via the `curtain` prop on <Footer>. Pinned to the
+   viewport bottom so the page content scrolls over it and reveals the
+   footer as a "curtain pull" near the end of the page. */
+.curtain {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  /* Slightly darker than the body so the footer reads as a distinct layer
+     sitting behind the paper curtain, not just a continuation of the page. */
+  background: linear-gradient(180deg, #091E40 0%, var(--ink) 18%, var(--ink) 100%);
+}
+
+/* The very top of the footer carries a stronger teal accent in curtain
+   mode — visually catches the eye as the curtain rises. */
+.curtain::before {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(91, 192, 193, 0.55) 25%,
+    rgba(91, 192, 193, 0.85) 50%,
+    rgba(91, 192, 193, 0.55) 75%,
+    transparent 100%
+  );
+  height: 1px;
+  box-shadow: 0 0 24px rgba(91, 192, 193, 0.35);
+}
+
+/* Top hairline — three-stop teal gradient with a stronger centre */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(91, 192, 193, 0.4) 30%,
+    rgba(91, 192, 193, 0.7) 50%,
+    rgba(91, 192, 193, 0.4) 70%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Soft top glow that anchors the divider */
+.footer::after {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 80px;
+  background: radial-gradient(ellipse at center, rgba(91, 192, 193, 0.18), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(20px);
+}
+
+/* Huge ghost wordmark in the background */
+.watermark {
+  position: absolute;
+  bottom: -0.18em;
+  right: -0.04em;
+  font-family: var(--font-serif);
+  font-size: clamp(11rem, 22vw, 22rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 0.75;
+  color: rgba(91, 192, 193, 0.045);
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.05em;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ──────────────────────────────────────────
+   CTA strip — top of footer
+   ────────────────────────────────────────── */
+.ctaStrip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+  padding: 3rem 0;
+  border-bottom: 1px solid rgba(246, 241, 231, 0.08);
+  position: relative;
+}
+
+.ctaContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 56ch;
+}
+
+.ctaTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.65rem, 2.6vw, 2.4rem);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  margin: 0;
+  font-variation-settings: "opsz" 72, "SOFT" 50;
+}
+
+.ctaTitle em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--teal-soft);
+}
+
+.ctaSub {
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  letter-spacing: 0.05em;
+  color: rgba(246, 241, 231, 0.45);
+  margin: 0;
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 1.6rem;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--paper);
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  transition: color 350ms ease, border-color 350ms ease, transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.ctaBtn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--teal-soft), var(--teal) 60%, var(--teal-deep));
+  transform: translateX(-100%);
+  transition: transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+.ctaBtn:hover::before { transform: translateX(0); }
+.ctaBtn:hover { color: var(--ink); border-color: transparent; transform: translateY(-2px); }
+.ctaBtn > * { position: relative; z-index: 1; }
+
+.ctaBtn svg {
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ctaBtn:hover svg { transform: translateX(3px); }
+
+/* ──────────────────────────────────────────
+   Main grid
+   ────────────────────────────────────────── */
+.mainRow {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 4rem;
+  padding: 4rem 0 3rem;
+}
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.logoWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.logo {
+  object-fit: contain;
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logoWrap:hover .logo { transform: rotate(-6deg) scale(1.05); }
+
+.brand {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--paper);
+  letter-spacing: -0.01em;
+}
+
+.brand em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--teal-soft);
+}
+
+.desc {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: rgba(246, 241, 231, 0.5);
+  max-width: 36ch;
+  margin: 0.25rem 0 0;
+}
+
+.socials {
+  display: flex;
+  gap: 0.55rem;
+  margin-top: 0.75rem;
+}
+
+.socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(246, 241, 231, 0.14);
+  color: rgba(246, 241, 231, 0.55);
+  transition:
+    background-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.socials a:hover {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--ink);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(91, 192, 193, 0.3);
+}
+
+/* ──────────────────────────────────────────
+   Links grid
+   ────────────────────────────────────────── */
+.linksGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.25fr;
+  gap: 2.5rem;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--teal-soft);
+  margin: 0 0 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.heading::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background: var(--teal-soft);
+  opacity: 0.6;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.list li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: rgba(246, 241, 231, 0.55);
+  text-decoration: none;
+  transition: color 250ms ease;
+  position: relative;
+}
+
+/* Inline accent dash that slides in on hover */
+.list li a::before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 1px;
+  background: var(--teal-soft);
+  transition: width 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.list li a:hover {
+  color: var(--paper);
+}
+
+.list li a:hover::before {
+  width: 14px;
+}
+
+.contactItem {
+  display: flex;
+  gap: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: rgba(246, 241, 231, 0.55);
+  line-height: 1.5;
+  align-items: flex-start;
+  padding-top: 0.1rem;
+}
+
+.contactItem svg {
+  flex-shrink: 0;
+  color: var(--teal-soft);
+  margin-top: 0.18rem;
+}
+
+.contactItem a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 250ms ease;
+}
+
+.contactItem a:hover {
+  color: var(--teal-soft);
+}
+
+.contactCity {
+  font-weight: 600;
+  color: rgba(246, 241, 231, 0.85);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+}
+
+.holidayNote {
+  font-style: normal;
+  font-size: 0.78rem;
+  color: rgba(246, 241, 231, 0.38);
+  margin-top: 0.1rem;
+  display: block;
+}
+
+/* ──────────────────────────────────────────
+   Bottom row
+   ────────────────────────────────────────── */
+.bottomRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.75rem 0;
+  border-top: 1px solid rgba(246, 241, 231, 0.08);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: rgba(246, 241, 231, 0.35);
+}
+
+.bottomMeta {
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(91, 192, 193, 0.5);
+}
+
+.backToTop {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem 0.65rem 0.9rem;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid rgba(246, 241, 231, 0.14);
+  color: rgba(246, 241, 231, 0.6);
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.backToTop svg {
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.backToTop:hover {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--ink);
+  box-shadow: 0 6px 22px rgba(91, 192, 193, 0.28);
+}
+
+.backToTop:hover svg {
+  transform: translateY(-3px);
+}
+
+/* ──────────────────────────────────────────
+   Responsive
+   ────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .mainRow {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .ctaStrip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 2.5rem 0;
+  }
+  .linksGrid {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 2.5rem;
+  }
+  .bottomRow {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .linksGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .watermark {
+    font-size: 8rem;
+  }
+}

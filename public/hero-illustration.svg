@@ -1,0 +1,217 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" role="img" aria-label="A schematic globe with travel arcs from Bengaluru, India to the medical destinations in Georgia, Uzbekistan and beyond.">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#163A60"/>
+      <stop offset="55%" stop-color="#102A4C"/>
+      <stop offset="100%" stop-color="#091E40"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2CA4A5" stop-opacity="0.28"/>
+      <stop offset="60%" stop-color="#2CA4A5" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#2CA4A5" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="globeShade" cx="35%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#13355C" stop-opacity="0.4"/>
+      <stop offset="55%" stop-color="#091E40" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#040F26" stop-opacity="1"/>
+    </radialGradient>
+    <pattern id="dots" x="0" y="0" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.9" fill="#5BC0C1" opacity="0.1"/>
+    </pattern>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1920" height="1080" fill="#0F2A57"/>
+  <rect width="1920" height="1080" fill="url(#sky)"/>
+  <rect width="1920" height="1080" fill="url(#dots)"/>
+
+  <!-- Atmospheric glow behind globe -->
+  <circle cx="1420" cy="540" r="640" fill="url(#glow)"/>
+
+  <!-- Distant stars -->
+  <g fill="#D4F1F1" opacity="0.7">
+    <circle cx="160" cy="160" r="1.2"/>
+    <circle cx="290" cy="90" r="0.9"/>
+    <circle cx="420" cy="200" r="1"/>
+    <circle cx="560" cy="120" r="0.8"/>
+    <circle cx="700" cy="240" r="1.1"/>
+    <circle cx="820" cy="80" r="0.9"/>
+    <circle cx="960" cy="180" r="1"/>
+    <circle cx="1080" cy="120" r="0.8"/>
+    <circle cx="1740" cy="120" r="1.1"/>
+    <circle cx="1820" cy="220" r="0.9"/>
+    <circle cx="1870" cy="80" r="0.7"/>
+    <circle cx="1660" cy="60" r="0.8"/>
+    <circle cx="1820" cy="380" r="0.9"/>
+    <circle cx="1760" cy="900" r="0.9"/>
+    <circle cx="1620" cy="940" r="0.8"/>
+    <circle cx="180" cy="820" r="0.9"/>
+    <circle cx="320" cy="940" r="0.8"/>
+    <circle cx="500" cy="880" r="1"/>
+  </g>
+
+  <!-- ============ GLOBE — centred on right ============ -->
+  <g transform="translate(1420, 540)">
+
+    <!-- Outer rim glow -->
+    <circle r="430" fill="none" stroke="#2CA4A5" stroke-width="0.6" opacity="0.5"/>
+    <circle r="412" fill="url(#globeShade)"/>
+    <circle r="412" fill="none" stroke="#5BC0C1" stroke-width="1.2" opacity="0.9"/>
+
+    <!-- Latitude ellipses (parallels) -->
+    <g fill="none" stroke="#5BC0C1" stroke-width="0.55" opacity="0.55">
+      <ellipse cx="0" cy="-260" rx="318" ry="36"/>
+      <ellipse cx="0" cy="-150" rx="380" ry="48"/>
+      <ellipse cx="0" cy="0"     rx="412" ry="55"/>
+      <ellipse cx="0" cy="150"  rx="380" ry="48"/>
+      <ellipse cx="0" cy="260"  rx="318" ry="36"/>
+      <ellipse cx="0" cy="340"  rx="220" ry="28"/>
+    </g>
+
+    <!-- Longitude curves (meridians) -->
+    <g fill="none" stroke="#5BC0C1" stroke-width="0.55" opacity="0.55">
+      <ellipse cx="0" cy="0" rx="412" ry="412"/>
+      <ellipse cx="0" cy="0" rx="55" ry="412"/>
+      <ellipse cx="0" cy="0" rx="160" ry="412"/>
+      <ellipse cx="0" cy="0" rx="270" ry="412"/>
+      <ellipse cx="0" cy="0" rx="350" ry="412"/>
+    </g>
+
+    <!-- Dashed back-meridians (suggesting the far side) -->
+    <g fill="none" stroke="#2CA4A5" stroke-width="0.5" stroke-dasharray="3 6" opacity="0.4">
+      <ellipse cx="0" cy="0" rx="220" ry="412"/>
+      <ellipse cx="0" cy="0" rx="100" ry="412"/>
+    </g>
+
+    <!-- Poles -->
+    <circle cx="0" cy="-412" r="3" fill="#5BC0C1"/>
+    <circle cx="0" cy="412" r="3" fill="#5BC0C1"/>
+
+    <!-- Soft continent splotches (very abstract, just to break the sphere) -->
+    <g fill="#5BC0C1" opacity="0.08">
+      <path d="M -260 -140 Q -200 -190 -120 -170 Q -50 -150 -20 -190 Q 30 -220 90 -180 Q 130 -150 100 -100 Q 80 -60 130 -40 Q 60 -20 -20 -60 Q -120 -90 -180 -60 Q -240 -40 -260 -100 Z"/>
+      <path d="M 90 40 Q 160 30 220 70 Q 260 120 230 170 Q 180 200 130 180 Q 80 160 70 110 Q 60 70 90 40 Z"/>
+      <path d="M -160 100 Q -100 110 -80 160 Q -90 220 -150 230 Q -210 220 -220 170 Q -220 120 -160 100 Z"/>
+    </g>
+
+    <!-- ============ City markers + arcs ============ -->
+    <!-- Bengaluru (origin) bottom -->
+    <g transform="translate(110, 300)">
+      <circle r="14" fill="none" stroke="#5BC0C1" stroke-width="0.8" opacity="0.6"/>
+      <circle r="22" fill="none" stroke="#5BC0C1" stroke-width="0.5" opacity="0.35"/>
+      <circle r="5" fill="#EFF3F4"/>
+      <circle r="2.5" fill="#0F2A57"/>
+      <text x="20" y="6" font-family="ui-monospace, monospace" font-size="13" letter-spacing="4" fill="#EFF3F4">BENGALURU</text>
+      <text x="20" y="24" font-family="ui-monospace, monospace" font-size="10" letter-spacing="3" fill="#5BC0C1">12.9°N · 77.6°E</text>
+    </g>
+
+    <!-- Georgia / Tbilisi top-left of globe -->
+    <g transform="translate(-200, -180)">
+      <circle r="9" fill="#2CA4A5"/>
+      <circle r="16" fill="none" stroke="#2CA4A5" stroke-width="0.8"/>
+      <circle r="24" fill="none" stroke="#2CA4A5" stroke-width="0.5" opacity="0.5"/>
+      <text x="-22" y="-16" text-anchor="end" font-family="ui-monospace, monospace" font-size="13" letter-spacing="4" fill="#EFF3F4">TBILISI</text>
+      <text x="-22" y="0" text-anchor="end" font-family="ui-monospace, monospace" font-size="10" letter-spacing="3" fill="#5BC0C1">41.7°N · 44.8°E</text>
+      <text x="-22" y="16" text-anchor="end" font-family="Georgia, serif" font-style="italic" font-size="13" fill="#5BC0C1">Georgia</text>
+    </g>
+
+    <!-- Uzbekistan / Tashkent upper area, more central -->
+    <g transform="translate(40, -120)">
+      <circle r="9" fill="#2CA4A5"/>
+      <circle r="16" fill="none" stroke="#2CA4A5" stroke-width="0.8"/>
+      <circle r="24" fill="none" stroke="#2CA4A5" stroke-width="0.5" opacity="0.5"/>
+      <text x="22" y="-12" font-family="ui-monospace, monospace" font-size="13" letter-spacing="4" fill="#EFF3F4">TASHKENT</text>
+      <text x="22" y="4" font-family="ui-monospace, monospace" font-size="10" letter-spacing="3" fill="#5BC0C1">41.3°N · 69.3°E</text>
+      <text x="22" y="20" font-family="Georgia, serif" font-style="italic" font-size="13" fill="#5BC0C1">Uzbekistan</text>
+    </g>
+
+    <!-- Russia (subtler, secondary) -->
+    <g transform="translate(-30, -300)">
+      <circle r="4" fill="#5BC0C1" opacity="0.7"/>
+      <text x="10" y="4" font-family="ui-monospace, monospace" font-size="9" letter-spacing="2" fill="#5BC0C1" opacity="0.8">RUSSIA</text>
+    </g>
+
+    <!-- Philippines (subtler) -->
+    <g transform="translate(260, 80)">
+      <circle r="4" fill="#5BC0C1" opacity="0.7"/>
+      <text x="10" y="4" font-family="ui-monospace, monospace" font-size="9" letter-spacing="2" fill="#5BC0C1" opacity="0.8">PHILIPPINES</text>
+    </g>
+
+    <!-- Bangladesh (subtler) -->
+    <g transform="translate(180, 220)">
+      <circle r="4" fill="#5BC0C1" opacity="0.7"/>
+      <text x="10" y="4" font-family="ui-monospace, monospace" font-size="9" letter-spacing="2" fill="#5BC0C1" opacity="0.8">BANGLADESH</text>
+    </g>
+
+    <!-- ============ Travel arcs from Bengaluru ============ -->
+    <g fill="none" stroke="#5BC0C1" stroke-width="1.2" opacity="0.85">
+      <!-- to Tbilisi (highlighted) -->
+      <path d="M 110 300 Q -150 -10 -200 -180" stroke="#2CA4A5" stroke-width="1.6" stroke-dasharray="5 4"/>
+      <!-- to Tashkent (highlighted) -->
+      <path d="M 110 300 Q 0 50 40 -120" stroke="#2CA4A5" stroke-width="1.6" stroke-dasharray="5 4"/>
+      <!-- to Russia (subtle) -->
+      <path d="M 110 300 Q -20 -20 -30 -300" stroke-width="0.6" stroke-dasharray="2 5" opacity="0.5"/>
+      <!-- to Philippines (subtle) -->
+      <path d="M 110 300 Q 220 220 260 80" stroke-width="0.6" stroke-dasharray="2 5" opacity="0.5"/>
+      <!-- to Bangladesh (subtle, short) -->
+      <path d="M 110 300 Q 160 260 180 220" stroke-width="0.6" stroke-dasharray="2 5" opacity="0.5"/>
+    </g>
+
+    <!-- Cardinal marks at globe rim -->
+    <g font-family="ui-monospace, monospace" font-size="11" letter-spacing="3" fill="#5BC0C1">
+      <text x="0" y="-440" text-anchor="middle">N</text>
+      <text x="0" y="448" text-anchor="middle">S</text>
+      <text x="-440" y="4" text-anchor="end">W</text>
+      <text x="440" y="4">E</text>
+    </g>
+
+  </g>
+
+  <!-- ============ NVVF wax seal — lower-left of the visible area (so it's clear) ============ -->
+  <g transform="translate(1100, 880)">
+    <circle r="80" fill="#0F2A57" stroke="#2CA4A5" stroke-width="1.2"/>
+    <circle r="66" fill="none" stroke="#2CA4A5" stroke-width="0.5" stroke-dasharray="2 4" opacity="0.7"/>
+    <defs>
+      <path id="sealTop" d="M -58 0 A 58 58 0 0 1 58 0"/>
+      <path id="sealBot" d="M -56 6 A 56 56 0 0 0 56 6"/>
+    </defs>
+    <text font-family="ui-monospace, monospace" font-size="9" letter-spacing="4" fill="#5BC0C1">
+      <textPath href="#sealTop" startOffset="50%" text-anchor="middle">NATIONAL · VIDESH · VIDYA</textPath>
+    </text>
+    <text font-family="ui-monospace, monospace" font-size="8" letter-spacing="3" fill="#5BC0C1">
+      <textPath href="#sealBot" startOffset="50%" text-anchor="middle">FOUNDATION · INDIA</textPath>
+    </text>
+    <text x="0" y="-2" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="22" fill="#EFF3F4">est.</text>
+    <text x="0" y="22" text-anchor="middle" font-family="ui-monospace, monospace" font-size="14" letter-spacing="5" fill="#EFF3F4">2012</text>
+  </g>
+
+  <!-- Vertical "PLATE 02" running mark along right edge -->
+  <g transform="translate(1880, 540) rotate(90)" font-family="ui-monospace, monospace" font-size="10" letter-spacing="7" fill="#5BC0C1" opacity="0.85">
+    <text x="0" y="0" text-anchor="middle">PLATE 02 · ROUTES · EDITION 2026</text>
+  </g>
+
+  <!-- Horizontal latitude grid in background (left side, subtle) -->
+  <g stroke="#5BC0C1" stroke-width="0.4" opacity="0.18">
+    <line x1="40" y1="240" x2="940" y2="240"/>
+    <line x1="40" y1="380" x2="940" y2="380"/>
+    <line x1="40" y1="540" x2="940" y2="540"/>
+    <line x1="40" y1="700" x2="940" y2="700"/>
+    <line x1="40" y1="860" x2="940" y2="860"/>
+  </g>
+
+  <!-- Border frames -->
+  <rect x="18" y="18" width="1884" height="1044" fill="none" stroke="#2CA4A5" stroke-width="0.8" opacity="0.45"/>
+  <rect x="28" y="28" width="1864" height="1024" fill="none" stroke="#5BC0C1" stroke-width="0.4" opacity="0.22"/>
+
+  <!-- Corner crosshairs -->
+  <g stroke="#5BC0C1" stroke-width="1" opacity="0.7">
+    <line x1="18" y1="60" x2="50" y2="60"/>
+    <line x1="60" y1="18" x2="60" y2="50"/>
+    <line x1="1902" y1="60" x2="1870" y2="60"/>
+    <line x1="1860" y1="18" x2="1860" y2="50"/>
+    <line x1="18" y1="1020" x2="50" y2="1020"/>
+    <line x1="60" y1="1062" x2="60" y2="1030"/>
+    <line x1="1902" y1="1020" x2="1870" y2="1020"/>
+    <line x1="1860" y1="1062" x2="1860" y2="1030"/>
+  </g>
+</svg>

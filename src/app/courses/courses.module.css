@@ -1,0 +1,489 @@
+/* ═══════════════════════════════════════════════
+   Courses Page Styles
+   ═══════════════════════════════════════════════ */
+
+/* Curtain wrap for footer reveal */
+.curtainWrap {
+  position: relative;
+  z-index: 1;
+  background-color: var(--paper);
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+  margin-bottom: var(--footer-height, 420px);
+}
+
+/* ──── Hero Section ──── */
+.hero {
+  position: relative;
+  padding: 12rem 0 8rem;
+  background-color: var(--ink);
+  color: var(--paper);
+  overflow: hidden;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to bottom, rgba(16, 42, 76, 0.4), rgba(16, 42, 76, 0.95)),
+    url(/courses-hero.png);
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--teal-soft);
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 auto 1.5rem;
+  max-width: 18ch;
+  color: var(--paper);
+}
+
+.title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--teal-soft);
+}
+
+.lede {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: rgba(239, 243, 244, 0.7);
+  max-width: 60ch;
+  margin: 0 auto;
+}
+
+/* ──── Postgraduate Section ──── */
+.pgSection {
+  background-color: var(--navy-deep);
+  color: var(--paper);
+  padding: 8rem 0;
+  position: relative;
+}
+
+.pgSection::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(91, 192, 193, 0.3), transparent);
+}
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 5rem;
+}
+
+.sectionHeader h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+}
+
+.sectionHeader h2 em {
+  font-style: italic;
+  color: var(--teal-soft);
+}
+
+.sectionHeader p {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(239, 243, 244, 0.6);
+  max-width: 50ch;
+}
+
+.pgGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.pgCard {
+  background: rgba(16, 42, 76, 0.5);
+  border: 1px solid rgba(91, 192, 193, 0.1);
+  padding: 3rem 2rem;
+  border-radius: 8px;
+  transition: transform 400ms ease, border-color 400ms ease, box-shadow 400ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pgCard::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 100% 0%, rgba(91, 192, 193, 0.1) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 400ms ease;
+}
+
+.pgCard:hover {
+  transform: translateY(-8px);
+  border-color: rgba(91, 192, 193, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.pgCard:hover::after {
+  opacity: 1;
+}
+
+.pgCard h3 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  color: var(--paper);
+}
+
+.pgCard p {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(239, 243, 244, 0.6);
+}
+
+/* ──── Undergraduate Section ──── */
+.ugSection {
+  background-color: var(--paper);
+  color: var(--ink);
+  padding: 8rem 0;
+}
+
+.ugHeader {
+  text-align: center;
+  margin-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ugHeader h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+
+.ugHeader p {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+  max-width: 60ch;
+}
+
+.ugGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.ugCard {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 400px;
+  box-shadow: 0 10px 30px rgba(16, 42, 76, 0.1);
+  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 500ms ease;
+}
+
+.ugCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(16, 42, 76, 0.2);
+}
+
+.ugImage {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: bottom center;
+  transition: transform 800ms ease;
+}
+
+.ugCard:hover .ugImage {
+  transform: scale(1.05);
+}
+
+.ugOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(16, 42, 76, 0.9) 0%, rgba(16, 42, 76, 0.4) 50%, rgba(16, 42, 76, 0.1) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2.5rem;
+}
+
+.ugContent h3 {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--paper);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.ugContent p {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(239, 243, 244, 0.8);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 400ms ease, transform 400ms ease;
+  transition-delay: 100ms;
+}
+
+.ugCard:hover .ugContent p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ugCardLink {
+  cursor: pointer;
+}
+
+.ugViewBtn {
+  display: inline-block;
+  margin-top: 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal-soft);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 350ms ease 200ms, transform 350ms ease 200ms;
+}
+
+.ugCard:hover .ugViewBtn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ──── Why Choose Us Section ──── */
+.whySection {
+  background-color: var(--paper-warm);
+  padding: 8rem 0 4rem; /* Reduced bottom padding from 8rem to 4rem */
+  border-top: 1px solid rgba(16, 42, 76, 0.05);
+}
+
+.whyHeader {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.whyHeader h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 300;
+  color: var(--ink);
+}
+
+.whyGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2rem;
+}
+
+/* Make the Reveal wrappers fill the grid area */
+.whyGrid > div {
+  display: flex;
+}
+
+/* Bento Box Layout: Top row 2 items (half width), Bottom row 3 items (third width) */
+.whyGrid > div:nth-child(1),
+.whyGrid > div:nth-child(2) {
+  grid-column: span 3;
+}
+
+.whyGrid > div:nth-child(3),
+.whyGrid > div:nth-child(4),
+.whyGrid > div:nth-child(5) {
+  grid-column: span 2;
+}
+
+.whyItem {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background: linear-gradient(160deg, #ffffff 0%, rgba(239, 243, 244, 0.4) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 24px;
+  padding: 3.5rem 3rem;
+  width: 100%;
+  box-shadow: 0 10px 40px rgba(16, 42, 76, 0.03);
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 400ms ease;
+}
+
+.whyItem::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+  opacity: 0.5;
+}
+
+.whyItem:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(16, 42, 76, 0.08);
+}
+
+.whyIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--teal-soft), var(--teal-deep));
+  color: var(--paper);
+  box-shadow: 0 10px 20px rgba(44, 164, 165, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.whyItem h4 {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.whyItem p {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--ink-muted);
+}
+
+.commitment {
+  margin-top: 6rem;
+  text-align: center;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4rem;
+  background: var(--paper);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(16, 42, 76, 0.05);
+}
+
+.commitment h3 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+.commitment p {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+
+/* ──── Call to Action (Shared) ──── */
+.ctaWrap {
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.applyBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 2.5rem;
+  background: var(--teal);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 400ms ease;
+}
+
+.applyBtn:hover {
+  background: var(--teal-soft);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(44, 164, 165, 0.3);
+}
+
+/* ──── Responsive ──── */
+@media (max-width: 1024px) {
+  .hero { padding: 10rem 0 6rem; }
+  .pgSection, .ugSection, .whySection { padding: 6rem 0; }
+  .commitment { padding: 3rem 2rem; }
+  
+  /* Tablet bento box: 2 cols per row */
+  .whyGrid > div:nth-child(n) {
+    grid-column: span 3;
+  }
+  .whyGrid > div:nth-child(5) {
+    grid-column: span 6; /* Last item full width */
+  }
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 8rem 0 4rem; }
+  .pgSection, .ugSection, .whySection { padding: 4rem 0; }
+  .sectionHeader { margin-bottom: 3rem; }
+  .pgGrid, .ugGrid { grid-template-columns: 1fr; }
+  .whyGrid { display: flex; flex-direction: column; gap: 1.5rem; }
+  .whyItem { padding: 2rem 1.5rem; }
+  .ugCard { height: 350px; }
+  .ugContent p { opacity: 1; transform: translateY(0); } /* Always show text on mobile */
+  .commitment { padding: 2.5rem 1.5rem; margin-top: 4rem; }
+}
