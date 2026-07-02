@@ -105,12 +105,12 @@ const Footer = ({ curtain = false }: FooterProps) => {
                   <MapPin size={14} strokeWidth={1.5} />
                   <span>
                     <strong className={styles.contactCity}>Chennai</strong><br />
-                    Evangeline Netto — <a href="tel:+918431250540">+91 84312 50540</a>
+                    Evangeline— <a href="tel:+918431250540">+91 84312 50540</a>
                   </span>
                 </li>
                 <li className={styles.contactItem}>
                   <Mail size={14} strokeWidth={1.5} />
-                  <span>ganeshcm9@gmail.com</span>
+                  <span>support@nvvfoundation.com</span>
                 </li>
                 <li className={styles.contactItem}>
                   <Clock size={14} strokeWidth={1.5} />

@@ -102,13 +102,13 @@ export default function ContactPage() {
               {/* Quick info cards */}
               <Reveal delay={200}>
                 <div className={styles.infoCards}>
-                  <a href="mailto:ganeshcm9@gmail.com" className={styles.infoCard}>
+                  <a href="mailto:support@nvvfoundation.com" className={styles.infoCard}>
                     <div className={styles.infoIcon}>
                       <Mail size={22} strokeWidth={1.5} />
                     </div>
                     <div className={styles.infoBody}>
                       <h4>Email Us</h4>
-                      <p>ganeshcm9@gmail.com</p>
+                      <p>support@nvvfoundation.com</p>
                     </div>
                     <ArrowUpRight size={14} className={styles.infoArrow} />
                   </a>
@@ -134,6 +134,16 @@ export default function ContactPage() {
                     <div className={styles.infoBody}>
                       <h4>Call Us</h4>
                       <p>+91 9844757075</p>
+                    </div>
+                    <ArrowUpRight size={14} className={styles.infoArrow} />
+                  </a>
+                  <a href="tel:+918431250540" className={styles.infoCard}>
+                    <div className={styles.infoIcon}>
+                      <Phone size={22} strokeWidth={1.5} />
+                    </div>
+                    <div className={styles.infoBody}>
+                      <h4>Call Us (Chennai)</h4>
+                      <p>+91 8431250540</p>
                     </div>
                     <ArrowUpRight size={14} className={styles.infoArrow} />
                   </a>
