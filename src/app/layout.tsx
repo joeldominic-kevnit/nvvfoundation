@@ -56,6 +56,16 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "National Videsh Vidya Foundation",
+  alternateName: "NVVF",
+  url: siteUrl,
+  logo: `${siteUrl}/logo.png`,
+  description,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -64,6 +74,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${fraunces.variable}`} suppressHydrationWarning>
+        <Script
+          id="organization-jsonld"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         {/* Meta Pixel Code */}
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
