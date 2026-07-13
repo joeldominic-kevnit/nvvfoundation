@@ -19,7 +19,8 @@ export async function POST() {
       receipt: `nvvf_${Date.now()}`,
     });
     return Response.json(order);
-  } catch {
+  } catch (err) {
+    console.error('Razorpay create-order error:', err);
     return Response.json({ error: 'Failed to create order' }, { status: 500 });
   }
 }
