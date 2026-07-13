@@ -12,7 +12,9 @@ export async function POST() {
 
   try {
     const order = await razorpay.orders.create({
-      amount: 3000000, // ₹30,000 in paise
+      // TEMPORARY: ₹1 for live-mode testing. Revert to 3000000 (₹30,000)
+      // before accepting real applications.
+      amount: 100,
       currency: 'INR',
       receipt: `nvvf_${Date.now()}`,
     });
